@@ -1,0 +1,72 @@
+{% extends "admin/admin_layout.html" %}
+
+{% block title %}Takso{% endblock %}}
+
+
+
+{% block content %}
+<h1>Sürücü Düzenle</h1>
+<p>Sürücücüyü düzenlemek için alanları doldurunuz!</p>
+<form action="{{ url_for('admin_update_driver', id=driver.id) }}" method="post">
+    <div class="mb-3">
+        <label for="name" class="form-label">Sürücü Adı</label>
+        <input type="text" class="form-control" name="name" value="{{driver.name}}">
+    </div>
+    <div class="mb-3">
+        <label for="last_name" class="form-label">Sürücü Soyadı</label>
+        <input type="text" class="form-control" name="last_name" value="{{driver.last_name}}">
+    </div>
+    <div class="mb-3">
+        <label for="last_name" class="form-label">Sürücü Fotoğraf Linki</label>
+        <input type="text" class="form-control" name="photo_link" value="{{driver.photo_link}}">
+    </div>
+    <div class="mb-3">
+        <label for="last_name" class="form-label">Sürücü Biyografisi</label>
+        <input type="text" class="form-control" name="biography" value="{{driver.biography}}">
+    </div>
+    <input type="hidden" name="id" value="{{driver.id}}">
+    <button type="submit" class="btn btn-primary">Sürücüyü Düzenle</button>
+</form>
+
+
+<div class="row mt-3">
+
+
+    {% for driver in drivers %}
+
+    <div class="col-6 mb-3">
+        <div class="card h-100">
+            <div class="row g-0">
+                <div class="col-md-5">
+                    <img src="{{ driver.photo_link }}" class="img-fluid rounded-start"
+                        style="width: 100%; height:17vw; object-fit: cover;">
+                </div>
+                <div class="col-md-7 d-flex flex-column">
+                    <div class="card-body ">
+                        <h5 class="card-title">{{ driver.name }} {{ driver.last_name }}</h5>
+                        <p class="card-text">{{ driver.biography }}</p>
+                        <p class="card-text"><small class="text-muted">Şu tarihten beri onaylı sürücü: {{
+                                driver.registered_date.strftime('%d.%m.%Y') }}
+                            </small></p>
+                        <p class="card-text"><small class="text-muted"> {%if driver.overall_score is not none %}
+                                Toplam 10 sürüşten genel ortalaması {{driver.overall_score}}/5
+                                {%else%}
+                                Henüz oylanmadı
+                                {%endif%}
+                            </small></p>
+
+                    </div>
+                    <a href="#" class="btn btn-primary align-bottom mx-5 mb-2">Sürücüyü Düzenle</a>
+                    <a href="{{url_for('admin_delete_driver', id=driver.id)}}" class="btn btn-danger align-bottom mx-5 mb-2">Sürücüyü Sil</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+
+
+</div>
+
+{% endblock %}

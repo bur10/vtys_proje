@@ -1,11 +1,26 @@
-{% extends "user/layout.html" %}
+{% extends "admin/admin_layout.html" %}
 
 {% block title %}Takso{% endblock %}}
 
+
+
 {% block content %}
-<h1>Bi takso</h1>
-<p>aşağıda boşta olan sürücülerimizi çağırabilirsiniz.</p>
-<div class="row mx-auto mt-auto">
+<h1>Sürücü Ara</h1>
+<p>Sürücü ile ilgili işlem yapmak için alanları doldurunuz!</p>
+<form action="{{ url_for('admin_driver_results') }}" method="post">
+    <div class="mb-3">
+        <label for="name" class="form-label">Sürücü Adı</label>
+        <input type="text" class="form-control" name="name" id="name">
+    </div>
+    <div class="mb-3">
+        <label for="last_name" class="form-label">Sürücü Soyadı</label>
+        <input type="text" class="form-control" name="last_name" id="last_name">
+    </div>
+    <button type="submit" class="btn btn-primary">Sürücüyü Bul</button>
+</form>
+
+
+<div class="row mt-3">
 
 
     {% for driver in drivers %}
@@ -13,11 +28,11 @@
     <div class="col-6 mb-3">
         <div class="card h-100">
             <div class="row g-0">
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <img src="{{ driver.photo_link }}" class="img-fluid rounded-start"
-                        style="width: 100%; height:14vw; object-fit: cover;">
+                        style="width: 100%; height:17vw; object-fit: cover;">
                 </div>
-                <div class="col-md-8 d-flex flex-column">
+                <div class="col-md-7 d-flex flex-column">
                     <div class="card-body ">
                         <h5 class="card-title">{{ driver.name }} {{ driver.last_name }}</h5>
                         <p class="card-text">{{ driver.biography }}</p>
@@ -32,7 +47,9 @@
                             </small></p>
 
                     </div>
-                    <a href="#" class="btn btn-primary align-bottom mx-5 mb-2">Sürücüyü Çağır</a>
+                    <a href="{{url_for('admin_update_driver', id=driver.id)}}"" class="btn btn-primary align-bottom mx-5 mb-2">Sürücüyü Düzenle</a>
+                    <a href="{{url_for('admin_delete_driver', id=driver.id)}}" class="btn btn-danger align-bottom mx-5 mb-2">Sürücüyü Sil</a>
+
                 </div>
             </div>
         </div>
@@ -42,12 +59,5 @@
 
 
 </div>
-
-<div class="mt-2 aktif-surusler">
-    <h3>Aktif Sürüşleriniz</h3>
-</div>
-
-</div>
-
 
 {% endblock %}
