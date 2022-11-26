@@ -1,0 +1,40 @@
+{% extends "user/layout.html" %}
+
+{% block title %}Takso{% endblock %}}
+
+{% block content %}
+<h1>Bi takso</h1>
+<p>aşağıda boşta olan sürücülerimizi çağırabilirsiniz.</p>
+<div class="container text-center">
+    <div class="row">
+        {% for driver in drivers %}
+        <div class="col">
+            <div class="card h-100" style="width: 18rem;">
+                <img src="{{ driver.photo_link }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ driver.name }} {{ driver.last_name }}</h5>
+                    <p class="card-text">{{ driver.biography }}</p>
+                    <div class="row">
+                        <div class="col">
+                            <p>Şu tarihten beri onaylı sürücü: {{ driver.registered_date.strftime('%Y-%m-%d') }}</p>
+                        </div>
+                        {% if driver.overall_score is not none %}
+                        <div class="col">
+                            <p>{{driver.overall_rank}}/5</p>
+                        </div>
+                        {% else %}
+                        <div class="col">
+                            <p>Henüz oylanmadı</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}
