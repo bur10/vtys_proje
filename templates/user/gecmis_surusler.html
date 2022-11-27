@@ -1,0 +1,41 @@
+{% extends "user/layout.html" %}
+
+{% block title %}Geçmiş Yolculuklar{% endblock %}}
+
+
+
+{% block content %}
+<h1>Geçmiş Tüm Yolculularınız</h1>
+
+<div class="row mt-3">
+
+
+    {% for voyage in voyages %}
+
+    <div class="col-6 mb-3">
+        <div class="card w-100 h-100">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ voyage.driver_info.photo_link }}" class="img-fluid rounded-start"
+                        style="width: 100%; height:14vw; object-fit: cover;">
+                </div>
+                <div class="col-md-8 d-flex flex-column">
+                    <div class="card-body ">
+                        <h5 class="card-title">Yolculuk: {{ voyage.where_from }} - {{voyage.where_to}}</h5>
+                        <p class="card-text">Sürücü: {{ voyage.driver_info.name}} {{
+                            voyage.driver_info.last_name }}</p>
+                        <p class="card-text"><small class="text-muted">Taksi: {{voyage.taxi_info.plate_number}}
+                            </small></p>
+                        <p class="card-text"><small class="text-muted">{{voyage.total}} TRY tuttu. {{voyage.rating}}/5 oyladınız</small></p>
+                        <p class="card-text"><small class="text-muted">Yolculuk {{voyage.call_date.strftime("%d-%m-%Y %H:%M")}} tarihinde basladı ve toplam {{ voyage.total_minutes }} dakika sürdü </small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+
+</div>
+
+{% endblock %}

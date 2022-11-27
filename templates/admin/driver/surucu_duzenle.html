@@ -1,0 +1,30 @@
+{% extends "admin/admin_layout.html" %}
+
+{% block title %}Admin Müşteri Düzenleme{% endblock %}}
+
+
+
+{% block content %}
+<h1>Sürücü Düzenle</h1>
+<p>Sürücücüyü düzenlemek için alanları doldurunuz!</p>
+<form action="{{ url_for('admin_update_driver', id=driver.id) }}" method="post">
+    <div class="mb-3">
+        <label for="name" class="form-label">Sürücü Adı</label>
+        <input type="text" class="form-control" name="name" value="{{driver.name}}">
+    </div>
+    <div class="mb-3">
+        <label for="last_name" class="form-label">Sürücü Soyadı</label>
+        <input type="text" class="form-control" name="last_name" value="{{driver.last_name}}">
+    </div>
+    <div class="mb-3">
+        <label for="last_name" class="form-label">Sürücü Fotoğraf Linki</label>
+        <input type="text" class="form-control" name="photo_link" value="{{driver.photo_link}}">
+    </div>
+    <div class="mb-3">
+        <label for="last_name" class="form-label">Sürücü Biyografisi</label>
+        <input type="text" class="form-control" name="biography" value="{{driver.biography}}">
+    </div>
+    <button type="submit" class="btn btn-primary">Sürücüyü Düzenle</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "admin/admin_layout.html" %}
+
+{% block title %}Takso{% endblock %}}
+
+
+
+{% block content %}
+<h1>Taksi Ekle</h1>
+<p>Taksi eklemek için gerekli alanları doldurunuz!</p>
+<form action="{{ url_for('admin_add_taxi') }}" method="post">
+    <div class="mb-3">
+        <label for="name" class="form-label">Plaka</label>
+        <input type="text" class="form-control" name="plate_number">
+    </div>
+    <div class="mb-3">
+        <label for="last_name" class="form-label">Araba Modeli</label>
+        <input type="text" class="form-control" name="car_model">
+    </div>
+    <div class="mb-3">
+        <label for="photo_link" class="form-label">Araba Yılı</label>
+        <input type="text" class="form-control" name="car_year">
+    </div>
+    <button type="submit" class="btn btn-primary">Taksi kaydet</button>
+
+</form>
+
+{% endblock %}

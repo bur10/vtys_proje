@@ -1,0 +1,21 @@
+{% extends "user/layout.html" %}
+
+{% block title %}Profilim{% endblock %}}
+
+
+{% block content %}
+<h1>Bilgileriniz</h1>
+
+
+<div class="card w-50 h-100">
+    <div class="card-body ">
+        <h5 class="card-title">{{ user.name }} {{ user.last_name }}</h5>
+        <p class="card-text">{{ user.phone_number }}</p>
+        <p class="card-text"><small class="text-muted">{{user.address}}</small></p>
+        <p class="card-text"><small class="text-muted">Kayıt Tarihi: {{user.registered_date}}</small></p>
+        <p class="card-text"><small class="text-muted">Toplam Yolculuk: {{user.total_voyages}}</small></p>
+    </div>
+
+</div>
+
+{% endblock %}

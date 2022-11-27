@@ -26,11 +26,45 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ url_for('admin_home') }}">Ana Sayfa</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('admin_add_driver') }}">Sürücü Ekle</a>
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Sürücü İşlemleri
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-light">
+                            <li><a class="dropdown-item" href="{{ url_for('admin_add_driver') }}">Sürücü Ekle</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('admin_driver_results') }}">Sürücü Ara</a>
+                            </li>
+                        </ul>
+
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('admin_driver_results') }}">Sürücü Ara</a>
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Müşteri İşlemleri
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-light">
+                            <li><a class="dropdown-item" href="{{ url_for('admin_add_customer') }}">Müşteri Ekle</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('admin_customer_results') }}">Müşteri Ara</a>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Taksi İşlemleri
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-light">
+                            <li><a class="dropdown-item" href="{{ url_for('admin_add_taxi') }}">Taksi Ekle</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('admin_delete_taxi') }}">Taksi Sil</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('admin_show_taxis') }}">Tüm Taksiler</a></li>
+
+                        </ul>
+
                     </li>
                 </ul>
             </div>
@@ -38,6 +72,15 @@
     </nav>
 
     <div class="container d-flex flex-column justify-content-center">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
         {% block content %}{% endblock %}
     </div>
     {% block scripts %}{% endblock %}

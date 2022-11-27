@@ -4,14 +4,59 @@
 
 {% block content %}
 <h1>Bi takso</h1>
+
+{% if voyage_info %}
+<div class="mt-2 aktif-surusler">
+    <h3>Aktif Sürüşleriniz</h3>
+
+    <div class="col-6 mb-3">
+        <div class="card w-100 h-100">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ voyage_info.driver_info.photo_link }}" class="img-fluid rounded-start"
+                        style="width: 100%; height:14vw; object-fit: cover;">
+                </div>
+                <div class="col-md-8 d-flex flex-column">
+                    <div class="card-body ">
+                        <h5 class="card-title">Yolculuk: {{ voyage_info.where_from }} - {{voyage_info.where_to}}</h5>
+                        <p class="card-text">Sürücü: {{ voyage_info.driver_info.name}} {{
+                            voyage_info.driver_info.last_name }}</p>
+                        <p class="card-text"><small class="text-muted">Taksi: {{voyage_info.taxi_info.plate_number}}
+                            </small></p>
+                        <p class="card-text"><small class="text-muted">
+                            </small></p>
+
+                    </div>
+                    <form action="{{url_for('end_voyage')}}" method="post">
+                        <div class="mb-3 w-50 mx-3">
+                            <label for="rating" class="form-label">Puanınız</label>
+                            <select name="rating" id="rating" class="form-select">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3" selected>3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 mb-2">Yolculuğu Puanla ve
+                            Bitir</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
 <p>aşağıda boşta olan sürücülerimizi çağırabilirsiniz.</p>
 <div class="row mx-auto mt-auto">
 
 
-    {% for driver in drivers %}
+    {% for driver in available_drivers %}
 
     <div class="col-6 mb-3">
-        <div class="card h-100">
+        <div class="card w-100 h-100">
             <div class="row g-0">
                 <div class="col-md-4">
                     <img src="{{ driver.photo_link }}" class="img-fluid rounded-start"
@@ -25,14 +70,15 @@
                                 driver.registered_date.strftime('%d.%m.%Y') }}
                             </small></p>
                         <p class="card-text"><small class="text-muted"> {%if driver.overall_score is not none %}
-                                Toplam 10 sürüşten genel ortalaması {{driver.overall_score}}/5
+                                Toplam {{driver.total_voyages}} sürüşten genel ortalaması {{driver.overall_score}}/5
                                 {%else%}
                                 Henüz oylanmadı
                                 {%endif%}
                             </small></p>
 
                     </div>
-                    <a href="#" class="btn btn-primary align-bottom mx-5 mb-2">Sürücüyü Çağır</a>
+                    <a href="{{url_for('call_driver', driver_id=driver.id)}}"
+                        class="btn btn-primary align-bottom mx-5 mb-2">Sürücüyü Çağır</a>
                 </div>
             </div>
         </div>
@@ -43,9 +89,7 @@
 
 </div>
 
-<div class="mt-2 aktif-surusler">
-    <h3>Aktif Sürüşleriniz</h3>
-</div>
+
 
 </div>
 

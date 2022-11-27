@@ -1,0 +1,31 @@
+{% extends "admin/admin_layout.html" %}
+
+{% block title %}Takso{% endblock %}}
+
+
+
+{% block content %}
+<h1>Müşteri Düzenle</h1>
+<p>Müşteriyi düzenlemek için alanları doldurunuz!</p>
+<form action="{{ url_for('admin_update_customer', id=customer.id) }}" method="post">
+    <div class="mb-3">
+        <label for="name" class="form-label">Müşteri Adı</label>
+        <input type="text" class="form-control" name="name" value="{{customer.name}}">
+    </div>
+    <div class="mb-3">
+        <label for="last_name" class="form-label">Müşteri Soyadı</label>
+        <input type="text" class="form-control" name="last_name" value="{{customer.last_name}}">
+    </div>
+    <div class="mb-3">
+        <label for="last_name" class="form-label">Müşteri Telefon Numarası</label>
+        <input type="text" class="form-control" name="phone_number" value="{{customer.phone_number}}">
+    </div>
+    <div class="mb-3">
+        <label for="last_name" class="form-label">Müşteri Adresi</label>
+        <input type="text" class="form-control" name="address" value="{{customer.address}}">
+    </div>
+    <button type="submit" class="btn btn-primary">Müşteriyi Düzenle</button>
+</form>
+
+
+{% endblock %}
