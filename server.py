@@ -6,7 +6,7 @@ from datetime import datetime
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-selected_customer = 2
+selected_customer = 4
 
 
 # --- ADMIN ROUTES ---
@@ -180,7 +180,7 @@ def call_driver(driver_id):
         driver_id=driver_id,
         taxi_id=random.choice([taxi['id'] for taxi in Taxis.get_all_taxis()]),
         where_to="Teknoloji Fakültesi",
-        where_from="Evden"
+        where_from=Customers.get_customer_by_id(selected_customer)['address']
     )
     if res == -1:
         flash("Sürücü çağırma başarısız! Zaten aktif bir yolculuğunuz var!", 'error')
