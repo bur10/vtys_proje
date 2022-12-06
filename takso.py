@@ -25,8 +25,14 @@ class Drivers:
         conn.commit()
 
     def delete_driver(id):
-        cursor.execute(f"DELETE FROM Drivers WHERE id = {id}")
-        conn.commit()
+        try:
+            cursor.execute("DELETE FROM PastVoyages WHERE driver_id=?", (id))
+            cursor.execute(f"DELETE FROM Drivers WHERE id = {id}")
+        except pyodbc.IntegrityError:
+            conn.rollback()
+            return -1
+        else:
+            conn.commit()
 
     def get_driver_by_name(name, last_name):
         if last_name != "":
@@ -70,8 +76,14 @@ class Customers:
         conn.commit()
 
     def delete_customer(id):
-        cursor.execute(f"DELETE FROM Customers WHERE id = {id}")
-        conn.commit()
+        try:
+            cursor.execute("DELETE FROM PastVoyages WHERE customer_id=?",(id))
+            cursor.execute(f"DELETE FROM Customers WHERE id = {id}")
+        except pyodbc.IntegrityError:
+            conn.rollback()
+            return -1
+        else:
+            conn.commit()
 
     def get_customer_by_name(name, last_name):
         if last_name != "":
@@ -101,13 +113,19 @@ class Taxis:
         conn.commit()
 
     def delete_taxi(id="", plate_number=""):
-        if plate_number != "":
-            cursor.execute('''DELETE FROM Taxis
-                        WHERE plate_number=?''', (plate_number))
+        try:
+            cursor.execute("DELETE FROM PastVoyages WHERE taxi_id=?",(id))
+            if plate_number != "":
+                cursor.execute('''DELETE FROM Taxis
+                            WHERE plate_number=?''', (plate_number))
+            else:
+                cursor.execute('''DELETE FROM Taxis
+                            WHERE id=?''', (id))
+        except pyodbc.IntegrityError:
+            conn.rollback()
+            return-1
         else:
-            cursor.execute('''DELETE FROM Taxis
-                        WHERE id=?''', (id))
-        conn.commit()
+            conn.commit()
 
     def get_taxi_by_id(id):
         cursor.execute("SELECT * FROM Taxis WHERE id=?", (id))

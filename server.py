@@ -36,7 +36,10 @@ def admin_add_taxi():
 def admin_delete_taxi():
     if request.method == "POST":
         print(request.form['plate_number'])
-        Taxis.delete_taxi(plate_number=request.form['plate_number'])
+        if Taxis.delete_taxi(plate_number=request.form['plate_number']) == -1:
+            flash("Yolculukta olan taksiyi silemezsiniz!", "danger")
+        else:
+            flash("Taksiyi başarıyla sildiniz!", "success")
         return redirect(url_for('admin_delete_taxi'))
     else:
         return render_template("admin/taxi/taksi_sil.html")
@@ -88,7 +91,10 @@ def admin_update_customer(id):
 
 @app.route("/admin/musteri_sil/<int:id>", methods=['GET'])
 def admin_delete_customer(id):
-    Customers.delete_customer(id)
+    if Customers.delete_customer(id) == -1:
+        flash("Yolculukta olan yolcuyu silemezsiniz!", "danger")
+    else:
+        flash("Yolcuyu başarılı bir şekilde sildiniz!", "success")
     return redirect(url_for('admin_customer_results'))
 
 
@@ -137,7 +143,10 @@ def admin_update_driver(id):
 
 @app.route("/admin/surucu_sil/<int:id>", methods=['GET'])
 def admin_delete_driver(id):
-    Drivers.delete_driver(id)
+    if Drivers.delete_driver(id) == -1:
+        flash("Yolculukta olan bir sürücüyü silemezsiniz", "danger")
+    else:
+        flash("Sürücü başarıyla silindi!", "success")
     return redirect(url_for('admin_driver_results'))
 
 
@@ -183,7 +192,9 @@ def call_driver(driver_id):
         where_from=Customers.get_customer_by_id(selected_customer)['address']
     )
     if res == -1:
-        flash("Sürücü çağırma başarısız! Zaten aktif bir yolculuğunuz var!", 'error')
+        flash("Sürücü çağırma başarısız! Zaten aktif bir yolculuğunuz var!", 'danger')
+    else:
+        flash("Yolculuğunuz başladı!", "success")
     return redirect(url_for('home'))
 
 @app.route("/user/surusu_bitir", methods=['POST'])
