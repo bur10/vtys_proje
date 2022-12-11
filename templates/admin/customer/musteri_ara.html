@@ -10,7 +10,7 @@
 <form action="{{ url_for('admin_customer_results') }}" method="post">
     <div class="mb-3">
         <label for="name" class="form-label">Müşteri Adı</label>
-        <input type="text" class="form-control" name="name">
+        <input type="text" class="form-control" name="name" required>
     </div>
     <div class="mb-3">
         <label for="last_name" class="form-label">Müşteri Soyadı</label>

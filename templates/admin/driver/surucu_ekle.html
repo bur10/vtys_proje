@@ -11,19 +11,19 @@
 <form action="{{ url_for('admin_add_driver') }}" method="post">
     <div class="mb-3">
         <label for="name" class="form-label">Sürücü Adı</label>
-        <input type="text" class="form-control" name="name">
+        <input type="text" class="form-control" name="name" required>
     </div>
     <div class="mb-3">
         <label for="last_name" class="form-label">Sürücü Soyadı</label>
-        <input type="text" class="form-control" name="last_name">
+        <input type="text" class="form-control" name="last_name" required>
     </div>
     <div class="mb-3">
         <label for="photo_link" class="form-label">Sürücü Fotoğraf Linki</label>
-        <input type="text" class="form-control" name="photo_link">
+        <input type="text" class="form-control" name="photo_link" required> 
     </div>
     <div class="mb-3">
         <label for="biography" class="form-label">Sürücü Biyografisi</label>
-        <input type="text" class="form-control" name="biography">
+        <input type="text" class="form-control" name="biography" required>
     </div>
     <button type="submit" class="btn btn-primary">Sürücü kaydet</button>
 </form>

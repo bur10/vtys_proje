@@ -11,19 +11,19 @@
 <form action="{{ url_for('admin_add_customer') }}" method="post">
     <div class="mb-3">
         <label for="name" class="form-label">Müşteri Adı</label>
-        <input type="text" class="form-control" name="name">
+        <input type="text" class="form-control" name="name" required>
     </div>
     <div class="mb-3">
         <label for="last_name" class="form-label">Müşteri Soyadı</label>
-        <input type="text" class="form-control" name="last_name">
+        <input type="text" class="form-control" name="last_name" required>
     </div>
     <div class="mb-3">
         <label for="photo_link" class="form-label">Müşteri Telefon Numarası</label>
-        <input type="text" class="form-control" name="phone_number">
+        <input type="text" class="form-control" name="phone_number" required>
     </div>
     <div class="mb-3">
         <label for="biography" class="form-label">Müşteri Adresi</label>
-        <input type="text" class="form-control" name="address">
+        <input type="text" class="form-control" name="address" required>
     </div>
     <button type="submit" class="btn btn-primary">Müşteri kaydet</button>
 </form>

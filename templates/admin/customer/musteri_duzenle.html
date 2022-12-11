@@ -10,19 +10,19 @@
 <form action="{{ url_for('admin_update_customer', id=customer.id) }}" method="post">
     <div class="mb-3">
         <label for="name" class="form-label">Müşteri Adı</label>
-        <input type="text" class="form-control" name="name" value="{{customer.name}}">
+        <input type="text" class="form-control" name="name" value="{{customer.name}}" required>
     </div>
     <div class="mb-3">
         <label for="last_name" class="form-label">Müşteri Soyadı</label>
-        <input type="text" class="form-control" name="last_name" value="{{customer.last_name}}">
+        <input type="text" class="form-control" name="last_name" value="{{customer.last_name}}" required>
     </div>
     <div class="mb-3">
         <label for="last_name" class="form-label">Müşteri Telefon Numarası</label>
-        <input type="text" class="form-control" name="phone_number" value="{{customer.phone_number}}">
+        <input type="text" class="form-control" name="phone_number" value="{{customer.phone_number}}" required>
     </div>
     <div class="mb-3">
         <label for="last_name" class="form-label">Müşteri Adresi</label>
-        <input type="text" class="form-control" name="address" value="{{customer.address}}">
+        <input type="text" class="form-control" name="address" value="{{customer.address}}" required>
     </div>
     <button type="submit" class="btn btn-primary">Müşteriyi Düzenle</button>
 </form>

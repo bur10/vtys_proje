@@ -10,15 +10,15 @@
 <form action="{{ url_for('admin_add_taxi') }}" method="post">
     <div class="mb-3">
         <label for="name" class="form-label">Plaka</label>
-        <input type="text" class="form-control" name="plate_number">
+        <input type="text" class="form-control" name="plate_number" required>
     </div>
     <div class="mb-3">
         <label for="last_name" class="form-label">Araba Modeli</label>
-        <input type="text" class="form-control" name="car_model">
+        <input type="text" class="form-control" name="car_model" required>
     </div>
     <div class="mb-3">
         <label for="photo_link" class="form-label">Araba Yılı</label>
-        <input type="text" class="form-control" name="car_year">
+        <input type="text" class="form-control" name="car_year" required>
     </div>
     <button type="submit" class="btn btn-primary">Taksi kaydet</button>
 
